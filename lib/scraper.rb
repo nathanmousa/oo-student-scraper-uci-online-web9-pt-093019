@@ -1,4 +1,5 @@
 require 'open-uri'
+require 'nokogiri'
 require 'pry'
 
 class Scraper
@@ -40,12 +41,9 @@ class Scraper
       end
     end
     
-    profile.css(".vitals-text-container a").each do |profile|
-      quote = profile
-      binding.pry
-    end
-      
+    student_hash[:profile_quote] = profile.css(".profile-quote").text
+    student_hash[:bio] = profile.css("div.description-holder p").text
+    binding.pry
     student_hash
   end
-
 end
